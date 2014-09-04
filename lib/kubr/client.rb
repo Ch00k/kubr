@@ -16,16 +16,35 @@ module Kubr
       args = [method]
       args << body.to_json if body
       process_response @cl[path].send(*args)
+    rescue RestClient::UnprocessableEntity, RestClient::InternalServerError => e
+      process_response e.response
     end
 
     def process_response(response)
       JSON.parse(response).recursively_symbolize_keys!
     end
 
+    def list_minions
+      response = send_request :get, 'minions'
+      response[:items]
+    end
+
+    def get_minion(id)
+      send_request :get, "minions/#{id}"
+    end
+
+    def delete_minion(id)
+      send_request :delete, "minions/#{id}"
+    end
+
     ['pod', 'service', 'replicationController'].each do |entity|
       define_method "list_#{entity.underscore.pluralize}" do
         response = send_request :get, entity.pluralize
         response[:items]
+      end
+
+      define_method "get_#{entity.underscore}" do |id|
+        send_request :get, "#{entity.pluralize}/#{id}"
       end
 
       define_method "create_#{entity.underscore}" do |config|
