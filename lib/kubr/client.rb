@@ -2,13 +2,13 @@ require 'json'
 require 'rest-client'
 require 'active_support/inflector'
 
-module Kuber
+module Kubr
   class Client
     def initialize
-      Kuber.configuration ||= Kuber::Configuration.new
-      @cl = RestClient::Resource.new(Kuber.configuration.url,
-                                     :user => Kuber.configuration.username,
-                                     :password => Kuber.configuration.password,
+      Kubr.configuration ||= Kubr::Configuration.new
+      @cl = RestClient::Resource.new(Kubr.configuration.url,
+                                     :user => Kubr.configuration.username,
+                                     :password => Kubr.configuration.password,
                                      :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
     end
 

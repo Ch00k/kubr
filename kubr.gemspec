@@ -1,15 +1,15 @@
-require './lib/kuber/version.rb'
+require './lib/Kubr/version.rb'
 
 
 Gem::Specification.new do |s|
-  s.name = 'kuber'
-  s.version = Kuber::VERSION
+  s.name = 'kubr'
+  s.version = Kubr::VERSION
   s.platform = Gem::Platform::RUBY
   s.authors = ['Andriy Yurchuk']
   s.email = ['ayurchuk@minuteware.net']
-  s.homepage = 'https://github.com/Ch00k/kuber'
-  s.summary = 'Kubernetes REST API client'
-  s.description = 'Simple wrapper over Kubernetes REST API'
+  s.homepage = 'https://github.com/Ch00k/kubr'
+  s.summary = 'Kubrnetes REST API client'
+  s.description = 'Ruby wrapper over Kubrnetes REST API'
   s.license = 'MIT'
 
   s.add_dependency 'rest-client'

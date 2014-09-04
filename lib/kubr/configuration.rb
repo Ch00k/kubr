@@ -1,4 +1,4 @@
-module Kuber
+module Kubr
   class Configuration
 
     attr_accessor :url, :username, :password
