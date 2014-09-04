@@ -1,4 +1,4 @@
-Kubr
+kubr
 =====
 
 Ruby client for [Kubrnetes](https://github.com/GoogleCloudPlatform/Kubrnetes) 
@@ -8,14 +8,14 @@ Installation
 ------------
 
 ```
-gem install Kubr
+gem install kubr
 ```
 
 Usage
 -----
 
 ```
-require 'Kubr'
+require 'kubr'
 
 Kubr.configure do |config|
   config.url = 'https://130.211.56.93/api/v1beta1'
