@@ -24,20 +24,7 @@ module Kubr
       JSON.parse(response).recursively_symbolize_keys!
     end
 
-    def list_minions
-      response = send_request :get, 'minions'
-      response[:items]
-    end
-
-    def get_minion(id)
-      send_request :get, "minions/#{id}"
-    end
-
-    def delete_minion(id)
-      send_request :delete, "minions/#{id}"
-    end
-
-    ['pod', 'service', 'replicationController'].each do |entity|
+    ['minion', 'pod', 'service', 'replicationController'].each do |entity|
       define_method "list_#{entity.underscore.pluralize}" do
         response = send_request :get, entity.pluralize
         response[:items]
@@ -47,16 +34,18 @@ module Kubr
         send_request :get, "#{entity.pluralize}/#{id}"
       end
 
-      define_method "create_#{entity.underscore}" do |config|
-        send_request :post, entity.pluralize, config
-      end
+      unless entity == 'minion'
+        define_method "create_#{entity.underscore}" do |config|
+          send_request :post, entity.pluralize, config
+        end
 
-      define_method "update_#{entity.underscore}" do |config|
-        send_request :put, entity.pluralize, config
-      end
+        define_method "update_#{entity.underscore}" do |config|
+          send_request :put, entity.pluralize, config
+        end
 
-      define_method "delete_#{entity.underscore}" do |id|
-        send_request :delete, "#{entity.pluralize}/#{id}"
+        define_method "delete_#{entity.underscore}" do |id|
+          send_request :delete, "#{entity.pluralize}/#{id}"
+        end
       end
     end
   end
