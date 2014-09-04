@@ -14,7 +14,7 @@ gem install kubr
 Usage
 -----
 
-```
+```ruby
 require 'kubr'
 
 Kubr.configure do |config|
