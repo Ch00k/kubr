@@ -26,8 +26,7 @@ module Kubr
 
     ['minion', 'pod', 'service', 'replicationController'].each do |entity|
       define_method "list_#{entity.underscore.pluralize}" do
-        response = send_request :get, entity.pluralize
-        response[:items]
+        send_request :get, entity.pluralize
       end
 
       define_method "get_#{entity.underscore}" do |id|
