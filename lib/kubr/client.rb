@@ -12,9 +12,10 @@ module Kubr
                                      :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
     end
 
-    def send_request(method, path, body=nil)
+    def send_request(method, path, labels=nil, body=nil)
       args = [method]
       args << body.to_json if body
+      path += parse_labels_hash(labels) if labels
       process_response @cl[path].send(*args)
     rescue RestClient::UnprocessableEntity, RestClient::InternalServerError => e
       process_response e.response
@@ -24,9 +25,15 @@ module Kubr
       JSON.parse(response).recursively_symbolize_keys!
     end
 
+    def parse_labels_hash(labels)
+      labels_string = '?labels='
+      labels.each { |key, value| labels_string << "#{key}=#{value}," }
+      labels_string
+    end
+
     ['minion', 'pod', 'service', 'replicationController'].each do |entity|
-      define_method "list_#{entity.underscore.pluralize}" do
-        send_request :get, entity.pluralize
+      define_method "list_#{entity.underscore.pluralize}" do |labels=nil|
+        send_request :get, entity.pluralize, labels
       end
 
       define_method "get_#{entity.underscore}" do |id|
