@@ -1,7 +1,7 @@
 kubr
 =====
 
-Ruby client for [Kubrnetes](https://github.com/GoogleCloudPlatform/Kubrnetes) 
+Ruby client for [Kubernetes](https://github.com/GoogleCloudPlatform/Kubernetes) 
 [REST API](http://cdn.rawgit.com/GoogleCloudPlatform/kubernetes/31a0daae3627c91bc96e1f02a6344cd76e294791/api/kubernetes.html)
 
 Installation

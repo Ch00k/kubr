@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors = ['Andriy Yurchuk']
   s.email = ['ayurchuk@minuteware.net']
   s.homepage = 'https://github.com/Ch00k/kubr'
-  s.summary = 'Kubrnetes REST API client'
-  s.description = 'Ruby wrapper over Kubrnetes REST API'
+  s.summary = 'Kubernetes REST API client'
+  s.description = 'Ruby wrapper over Kubernetes REST API'
   s.license = 'MIT'
 
   s.add_dependency 'rest-client'
