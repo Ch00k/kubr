@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kubr (0.0.2)
+    kubr (0.0.3)
       activesupport
       rest-client
 

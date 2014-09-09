@@ -12,7 +12,7 @@ module Kubr
                                      :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
     end
 
-    def send_request(method, path, labels=nil, body=nil)
+    def send_request(method, path, body=nil, labels=nil)
       args = [method]
       args << body.to_json if body
       path += parse_labels_hash(labels) if labels
@@ -33,7 +33,7 @@ module Kubr
 
     ['minion', 'pod', 'service', 'replicationController'].each do |entity|
       define_method "list_#{entity.underscore.pluralize}" do |labels=nil|
-        send_request :get, entity.pluralize, labels
+        send_request :get, entity.pluralize, nil, labels
       end
 
       define_method "get_#{entity.underscore}" do |id|
