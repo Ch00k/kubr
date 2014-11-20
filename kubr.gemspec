@@ -1,4 +1,4 @@
-require './lib/Kubr/version.rb'
+require './lib/kubr/version.rb'
 
 
 Gem::Specification.new do |s|
