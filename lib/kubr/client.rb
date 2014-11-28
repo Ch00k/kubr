@@ -7,11 +7,11 @@ module Kubr
     def initialize
       Kubr.configuration ||= Kubr::Configuration.new
       opts = {:verify_ssl => OpenSSL::SSL::VERIFY_NONE}
-      if Kubr.configuration.token
+      unless Kubr.configuration.token.empty?
         opts[:headers] = {:authorization => "Bearer #{Kubr.configuration.token}"}
       else
-        opts.merge({ :user => Kubr.configuration.username,
-                     :password => Kubr.configuration.password })
+        opts.merge!({ :user => Kubr.configuration.username,
+                      :password => Kubr.configuration.password })
       end
 
       @cl = RestClient::Resource.new(Kubr.configuration.url,
