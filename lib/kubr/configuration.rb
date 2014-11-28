@@ -1,12 +1,13 @@
 module Kubr
   class Configuration
 
-    attr_accessor :url, :username, :password
+    attr_accessor :url, :username, :password, :token
 
     def initialize
       @url = ''
       @username = ''
       @password = ''
+      @token = ''
     end
   end
 

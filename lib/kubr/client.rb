@@ -6,10 +6,16 @@ module Kubr
   class Client
     def initialize
       Kubr.configuration ||= Kubr::Configuration.new
+      opts = {:verify_ssl => OpenSSL::SSL::VERIFY_NONE}
+      unless Kubr.configuration.token.empty?
+        opts[:headers] = {:authorization => "Bearer #{Kubr.configuration.token}"}
+      else
+        opts.merge!({ :user => Kubr.configuration.username,
+                      :password => Kubr.configuration.password })
+      end
+
       @cl = RestClient::Resource.new(Kubr.configuration.url,
-                                     :user => Kubr.configuration.username,
-                                     :password => Kubr.configuration.password,
-                                     :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
+                                     opts)
     end
 
     def send_request(method, path, body=nil, labels=nil)
